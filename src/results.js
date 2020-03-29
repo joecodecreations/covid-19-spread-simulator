@@ -55,6 +55,7 @@ export const resetValues = (isDesktopNewValue = isDesktop) => {
 
 export const updateCount = () => {
   if (RUN.tick < TOTAL_TICKS) {
+    
     // calculate max concurrent infected
     if (RUN.results[STATES.infected] > RUN.results['max-concurrent-infected']) {
       RUN.results['max-concurrent-infected']++

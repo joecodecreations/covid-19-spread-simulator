@@ -18,14 +18,16 @@ export const COLORS = {
   death: '#c50000',
   recovered: '#D88DBC',
   infected: '#5ABA4A',
-  well: '#63C8F2'
+  well: '#63C8F2',
+  protected: 'orange'
 }
 
 export const STATES = {
   infected: 'infected',
   well: 'well',
   recovered: 'recovered',
-  death: 'death'
+  death: 'death',
+  protected: 'protected'
 }
 
 export const COUNTERS = {
@@ -34,10 +36,11 @@ export const COUNTERS = {
 }
 
 export const STARTING_BALLS = {
-  [STATES.infected]: 1,
-  [STATES.well]: 199,
+  [STATES.infected]: 10,
+  [STATES.well]: 196,
   [STATES.recovered]: 0,
   [STATES.death]: 0,
+  [STATES.protected]: 0,
   'max-concurrent-infected': 0
 }
 

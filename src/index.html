@@ -19,7 +19,6 @@
   <meta property="og:site_name" content="midu.dev" />
 
   <link rel="canonical" href="https://corona-virus-spread-simulator.midudev.now.sh/">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link as="script" rel="preload" href="./p5.min.js" />
   <link as="script" rel="modulepreload" href="./app.js" />
@@ -183,6 +182,33 @@
         <label aria-label="Activate People Stay At Home filter" title="People stay at home">
           <input id="stay-home" type="checkbox">🏠 Stay At Home
         </label>
+        <span style="padding-left:10px; padding-right:10px;">
+        <label aria-label="Activate people using PPE" title="Enforve people using PPE" style="outline:none;">
+          <select id="PPEEnforced">
+            <option value="false" selected="selected">false</option>
+            <option value="true">true</option>
+           </select>
+           
+           Enforce PPE <select id="percentagePPE" style="outline:none;">
+            <option value='4' selected="selected">25%</option>
+            <option value='3'>33%</option>
+            <option value='2'>50%</option>
+            <option value='1'>100%</option>
+          </select>
+          PPE percentages Used
+
+          <select id="ppeEfficacy" style="outline:none;">
+            <option value="10" selected="selected">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="70">70</option>
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="95">95</option>
+          </select> PPE Efficacy
+        </label>
+      </span>
         <label aria-label="Activate Deaths provoked by virus" title="Deaths provoked by virus">
           <input id="deaths" type="checkbox">☠️ Show deaths
         </label>
@@ -192,6 +218,7 @@
         <div>Healthy<br /><span id="well">0</span></div>
         <div>Recovered<br /><span id="recovered">0</span></div>
         <div>Sick<br /><span id="infected">0</span></div>
+        <div id="protected-count">Infections Prevented<br /><span id="protected">0</span></div>
         <div id="death-count">Deaths<br /><span id="death">0</span></div>
         <div>Max Concurrently Sick<br /><span id="max-concurrent-infected">0</span></div>
       </div>
@@ -208,7 +235,7 @@
   </main>
   
   <footer>
-    Based on <a target="_blank" rel="noopener nofollow" href='https://www.washingtonpost.com/graphics/2020/world/corona-simulator/'>Washington Post article</a> | <a href='https://github.com/midudev/covid-19-spread-simulator' target="_blank" rel="noopener nofollow">Source Code</a> | By <a href='https://midu.dev'>@midudev</a>
+    Based on <a target="_blank" rel="noopener nofollow" href='https://www.washingtonpost.com/graphics/2020/world/corona-simulator/'>Washington Post article</a> | <a href='https://github.com/midudev/covid-19-spread-simulator' target="_blank" rel="noopener nofollow">Source Code</a> | By <a href='https://midu.dev'>@midudev</a> | Updated By <a href='https://github.com/joecodecreations/covid-19-spread-simulator' target="_blank" rel="noopener nofollow">@joecodecreations</a>
   </footer>
 </body>
 </html>

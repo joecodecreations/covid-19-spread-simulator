@@ -12,18 +12,19 @@ import { checkCollision, calculateChangeDirection } from './collisions.js'
 const diameter = BALL_RADIUS * 2
 
 export class Ball {
-  constructor ({ x, y, id, state, sketch, hasMovement }) {
+  constructor ({ x, y, id, state, sketch, hasMovement, isProtected }) {
     this.x = x
     this.y = y
     this.vx = sketch.random(-1, 1) * SPEED
     this.vy = sketch.random(-1, 1) * SPEED
     this.sketch = sketch
     this.id = id
-    this.state = state
+    this.state = (isProtected && state !== 'infected') ? 'protected': state,
     this.timeInfected = 0
     this.hasMovement = hasMovement
     this.hasCollision = true
     this.survivor = false
+    this.isProtected = isProtected
   }
 
   checkState () {
@@ -68,15 +69,31 @@ export class Ball {
         otherBall.vx = ax
         otherBall.vy = ay
 
+        
         // both has same state, so nothing to do
         if (this.state === state) return
         // if any is recovered, then nothing happens
         if (this.state === STATES.recovered || state === STATES.recovered) return
-        // then, if some is infected, then we make both infected
-        if (this.state === STATES.infected || state === STATES.infected) {
-          this.state = otherBall.state = STATES.infected
-          RUN.results[STATES.infected]++
-          RUN.results[STATES.well]--
+
+        const randomizeAnOutcome = Math.random() * 100; 
+        const ppeEfficancy = document.getElementById('ppeEfficacy').value;
+        const ppeEnforced = document.getElementById('PPEEnforced').value === 'true';
+        console.log('ppeEfficancy', ppeEfficancy);
+        console.log('ppeEnforced', ppeEnforced);
+        
+        if(ppeEnforced && this.isProtected && !(randomizeAnOutcome > ppeEfficancy)) {
+          console.log(`RANDOMIZE: ${randomizeAnOutcome} > ${ppeEfficancy}`)
+          console.log('PPE Saved an Infection!');
+          RUN.results[STATES.protected]++
+        } else {
+          console.log(`RANDOMIZE:  ${randomizeAnOutcome} > ${ppeEfficancy}`)
+          console.log('NOPE');
+          // then, if some is infected, then we make both infected
+          if (this.state === STATES.infected || state === STATES.infected) {
+            this.state = otherBall.state = STATES.infected
+            RUN.results[STATES.infected]++
+            RUN.results[STATES.well]--
+          }
         }
       }
     }
